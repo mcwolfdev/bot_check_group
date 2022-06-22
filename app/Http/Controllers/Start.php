@@ -13,9 +13,9 @@ class Start extends MainHandler
         $in_group = false;
         try{
             $answer = $this->bot->getChatMember([
-                'user_id' => $user_id, //$user_id 564880693
+                'user_id' => $user_id,
                 'chat_id' => $group_id
-            ]); //-1001768736388 - ід канала
+            ]);
             if ($answer->status!='left'){
                 $in_group = $group_id;
             }

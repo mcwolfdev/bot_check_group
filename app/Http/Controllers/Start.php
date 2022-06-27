@@ -35,13 +35,20 @@ class Start extends MainHandler
 
             if (!$this->check_in_group($group->gruop_id, $this->update->user()->id)){
                 $this->sendMessage([
-                    'text' => "Здравствуйте, ".$this->update->user()->first_name."! Для того, чтобы пользоваться ботом, нужно подписаться на паблик(и): "."\n".$this->channels($group->gruop_id, $this->update->user()->id),
+                    'text' => "Здравствуйте, ".$this->update->user()->first_name."! здесь вы можете посмотреть фильмы 🎥. Для того, чтобы пользоваться ботом, нужно подписаться на паблик(и): "."\n".$this->channels($group->gruop_id, $this->update->user()->id),
                 ]);
                 return;
             }
         }
 
-        $this->sendChatAction([
+        if ($this->check_in_group($group->gruop_id, $this->update->user()->id)){
+            $this->sendMessage([
+                'text' => "Чтобы найти фильм, просто введите его название",
+            ]);
+            return;
+        }
+
+/*        $this->sendChatAction([
             'action' => 'typing'
         ]);
 
@@ -50,7 +57,7 @@ class Start extends MainHandler
 
 <i>Это тестовый бот</i>",
             'parse_mode'=>'html'
-        ]);
+        ]);*/
     }
 
     public function channels($group_id, $user_id)
@@ -60,9 +67,9 @@ class Start extends MainHandler
         foreach (TeleGruop::all() as $AllGroup) {
             if (TeleGruop::all()->count() > 1) {
                 if ($this->check_in_group($AllGroup->gruop_id, $this->update->user()->id)){
-                    $res = $res.'✅'.$AllGroup->name.' ';
+                    $res = $res.'✅ 👍'.$AllGroup->name.' ';
                 }elseif (!$this->check_in_group($AllGroup->gruop_id, $this->update->user()->id)){
-                    $res = $res.'❌'.$AllGroup->name.' ';
+                    $res = $res.'❌ 👉'.$AllGroup->name.' ';
                 }
             }
         }

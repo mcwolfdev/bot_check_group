@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Repositories\Bots\Telegram\State;
 
 use App\Models\TeleGruop;
 use App\Repositories\Bots\MainHandler;
@@ -43,9 +43,14 @@ class Start extends MainHandler
 
         if ($this->check_in_group($group->gruop_id, $this->update->user()->id)){
             $this->sendMessage([
-                'text' => "Чтобы найти фильм, просто введите его название",
+                'text' => "📣 Здесь вы можете найти фильмы 📺
+🔍Чтобы найти фильм, просто введите его название ",
+                'parse_mode'=>'html'
             ]);
-            return;
+
+            $this->applyState('Films');
+            $handler = new Films($this->bot,$this->update);
+            $handler->run();
         }
 
 /*        $this->sendChatAction([

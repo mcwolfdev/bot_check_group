@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Repositories\Bots\Telegram\Action;
 
 use App\Models\TeleGruop;
 use App\Repositories\Bots\MainHandler;

@@ -44,7 +44,8 @@ class MainHandler extends UpdateHandler
 
     public function handle()
     {
-
+        $text = $this->update->message->text;
+        if ($text[0] != '/'){ // если не команда
         switch ($this->getState()) {
             case 'start':
                 $handler = new Start($this->bot, $this->update);
@@ -84,7 +85,7 @@ class MainHandler extends UpdateHandler
         } catch (\Exception $e) {
 
         }
-
+        }
 
     }
 
